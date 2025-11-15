@@ -1,0 +1,126 @@
+/**
+ * TRANSKWANZA - Auth Styles
+ * Estilos para login e cadastro
+ */
+
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card {
+    padding: var(--spacing-2xl);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.auth-header .logo {
+    display: inline-flex;
+    margin-bottom: var(--spacing-lg);
+}
+
+.auth-header h1 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.auth-header p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.auth-form {
+    margin-bottom: var(--spacing-lg);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.divider span {
+    padding: 0 var(--spacing-md);
+    font-size: var(--font-size-sm);
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.btn-social {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    color: #fff;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-social:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-google { border-color: #DB4437; }
+.btn-google:hover { background: rgba(219, 68, 55, 0.1); }
+
+.btn-facebook { border-color: #4267B2; }
+.btn-facebook:hover { background: rgba(66, 103, 178, 0.1); }
+
+.btn-instagram { border-color: #E1306C; }
+.btn-instagram:hover { background: rgba(225, 48, 108, 0.1); }
+
+.btn-apple { border-color: #000; }
+.btn-apple:hover { background: rgba(0, 0, 0, 0.2); }
+
+.auth-footer {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-footer a {
+    color: var(--primary-light);
+    font-weight: var(--font-weight-medium);
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+    .auth-card {
+        padding: var(--spacing-lg);
+    }
+}

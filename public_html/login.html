@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TransKwanza</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+
+    <!-- Apple Sign In -->
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/pt_BR/appleid.auth.js"></script>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card glass-card">
+            <div class="auth-header">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>TransKwanza</span>
+                </a>
+                <h1>Bem-vindo de Volta</h1>
+                <p>Faça login para continuar</p>
+            </div>
+
+            <!-- Login Tradicional -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Sua senha" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Entrar
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>OU</span>
+            </div>
+
+            <!-- Social Login -->
+            <div class="social-login">
+                <button id="googleLoginBtn" class="btn-social btn-google">
+                    <i class="fab fa-google"></i>
+                    Continuar com Google
+                </button>
+
+                <button id="facebookLoginBtn" class="btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    Continuar com Facebook
+                </button>
+
+                <button id="instagramLoginBtn" class="btn-social btn-instagram">
+                    <i class="fab fa-instagram"></i>
+                    Continuar com Instagram
+                </button>
+
+                <button id="appleLoginBtn" class="btn-social btn-apple">
+                    <i class="fab fa-apple"></i>
+                    Continuar com Apple
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/social-login.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
