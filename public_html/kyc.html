@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação KYC - TransKwanza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container" style="max-width: 600px;">
+        <div class="auth-card glass-card">
+            <div class="auth-header">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>TransKwanza</span>
+                </a>
+                <h1>Verificação de Identidade (KYC)</h1>
+                <p id="kycStatusMessage">Envie seus documentos para verificação</p>
+            </div>
+
+            <!-- Status Display -->
+            <div id="kycStatusDisplay" style="display: none;"></div>
+
+            <!-- KYC Form -->
+            <form id="kycForm" class="auth-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="documentType">Tipo de Documento *</label>
+                    <select id="documentType" name="documentType" required>
+                        <option value="">Selecione...</option>
+                        <option value="rg">RG (Registro Geral)</option>
+                        <option value="cpf">CPF</option>
+                        <option value="cnh">CNH (Carteira de Motorista)</option>
+                        <option value="passport">Passaporte</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentNumber">Número do Documento *</label>
+                    <input type="text" id="documentNumber" name="documentNumber" placeholder="Ex: 12.345.678-9" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentFront">Foto da Frente do Documento *</label>
+                    <input type="file" id="documentFront" name="documentFront" accept="image/*,.pdf" required>
+                    <small style="color: rgba(255,255,255,0.6);">JPG, PNG ou PDF - Máx. 5MB</small>
+                    <div id="previewFront" class="image-preview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentSelfie">Selfie com o Documento *</label>
+                    <input type="file" id="documentSelfie" name="documentSelfie" accept="image/*" required>
+                    <small style="color: rgba(255,255,255,0.6);">Tire uma foto segurando seu documento ao lado do rosto</small>
+                    <div id="previewSelfie" class="image-preview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentBack">Foto do Verso (Opcional)</label>
+                    <input type="file" id="documentBack" name="documentBack" accept="image/*,.pdf">
+                    <div id="previewBack" class="image-preview"></div>
+                </div>
+
+                <div style="background: rgba(255,200,0,0.1); padding: 1rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #f39c12;">
+                    <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Importante:</strong> Certifique-se de que todos os dados estão legíveis e a foto está nítida.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block" id="submitBtn">
+                    <i class="fas fa-upload"></i>
+                    Enviar Documentos
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Já verificado? <a href="dashboard.html">Ir para Dashboard</a></p>
+                <p><a href="#" id="logoutBtn">Sair</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/kyc.js"></script>
+</body>
+</html>

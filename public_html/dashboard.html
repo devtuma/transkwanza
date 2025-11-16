@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TransKwanza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <div class="container">
+        <!-- Header -->
+        <div class="dashboard-header glass-card">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">US</div>
+                <div class="user-details">
+                    <h2 id="userName">Usuário</h2>
+                    <p id="userEmail">email@exemplo.com</p>
+                </div>
+            </div>
+            <div>
+                <button id="logoutBtn" class="btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="dashboard-grid">
+            <div class="dashboard-card glass-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-wallet"></i> Saldo Total</h3>
+                </div>
+                <p style="font-size: 2rem; font-weight: bold; color: #2ecc71; margin: 0;">R$ 0,00</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Em breve: carteira integrada</p>
+            </div>
+
+            <div class="dashboard-card glass-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-exchange-alt"></i> Transações</h3>
+                </div>
+                <p style="font-size: 2rem; font-weight: bold; margin: 0;" id="totalTransactions">0</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Transações completadas</p>
+            </div>
+
+            <div class="dashboard-card glass-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-star"></i> Reputação</h3>
+                </div>
+                <p style="font-size: 2rem; font-weight: bold; color: #f39c12; margin: 0;" id="userReputation">0.0</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">De 5.0 estrelas</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-card glass-card" style="margin-top: 2rem;">
+            <div class="tabs">
+                <button class="tab active" data-tab="proposals">
+                    <i class="fas fa-list"></i> Propostas Disponíveis
+                </button>
+                <button class="tab" data-tab="my-proposals">
+                    <i class="fas fa-folder"></i> Minhas Propostas
+                </button>
+                <button class="tab" data-tab="transactions">
+                    <i class="fas fa-history"></i> Transações
+                </button>
+                <button class="tab" data-tab="create">
+                    <i class="fas fa-plus-circle"></i> Criar Proposta
+                </button>
+            </div>
+
+            <!-- Tab: Propostas Disponíveis -->
+            <div id="tab-proposals" class="tab-content active">
+                <div style="margin-bottom: 1.5rem;">
+                    <h3>Buscar Propostas</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <select id="filterFrom">
+                            <option value="">De (Todas)</option>
+                        </select>
+                        <select id="filterTo">
+                            <option value="">Para (Todas)</option>
+                        </select>
+                        <button id="searchProposals" class="btn-primary">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+                <div id="proposalsList"></div>
+            </div>
+
+            <!-- Tab: Minhas Propostas -->
+            <div id="tab-my-proposals" class="tab-content">
+                <div id="myProposalsList"></div>
+            </div>
+
+            <!-- Tab: Transações -->
+            <div id="tab-transactions" class="tab-content">
+                <div id="transactionsList"></div>
+            </div>
+
+            <!-- Tab: Criar Proposta -->
+            <div id="tab-create" class="tab-content">
+                <form id="createProposalForm" style="max-width: 600px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 1.5rem;">Nova Proposta de Câmbio</h3>
+
+                    <div class="form-group">
+                        <label>Tipo de Proposta</label>
+                        <select id="proposalType" required>
+                            <option value="sell">Vender (Eu tenho e quero trocar)</option>
+                            <option value="buy">Comprar (Eu preciso)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Moeda que Tenho</label>
+                        <select id="currencyFrom" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Moeda que Quero</label>
+                        <select id="currencyTo" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Valor</label>
+                        <input type="number" id="amountFrom" min="1" step="0.01" placeholder="1000.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Taxa de Câmbio (1 unidade da moeda origem)</label>
+                        <input type="number" id="exchangeRate" min="0.000001" step="0.000001" placeholder="0.20" required>
+                        <small style="color: rgba(255,255,255,0.6);">Ex: 1 BRL = 0.20 USD</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Método de Pagamento</label>
+                        <input type="text" id="paymentMethod" placeholder="PIX, TED, Transferência, etc." required>
+                    </div>
+
+                    <div style="background: rgba(52,152,219,0.1); padding: 1rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #3498db;">
+                        <p id="conversionPreview" style="margin: 0; color: #fff;"></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-rocket"></i> Criar Proposta
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/currency.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
