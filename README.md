@@ -8,14 +8,19 @@ Sistema completo de remessas internacionais peer-to-peer suportando 9 países e 
 
 ### Funcionalidades Principais
 
+- ✅ **Calculadora de Conversão em Tempo Real** - Conversor interativo na página inicial
 - ✅ Sistema de autenticação tradicional (email/senha)
 - ✅ Login social (Google, Facebook, Instagram, Apple)
-- ✅ KYC (Know Your Customer) com upload de documentos
-- ✅ Sistema anti-fraude integrado
-- ✅ Painel administrativo completo
-- ✅ Propostas de câmbio P2P
+- ✅ KYC (Know Your Customer) com upload de documentos e preview
+- ✅ Sistema anti-fraude integrado com detecção automática
+- ✅ Painel administrativo completo com estatísticas
+- ✅ Propostas de câmbio P2P com filtros avançados
 - ✅ Sistema de transações com aprovação manual
-- ✅ Suporte a 9 países/moedas
+- ✅ Suporte a 9 países/moedas com informações detalhadas
+- ✅ Central de suporte com FAQ completo
+- ✅ Páginas legais (Termos de Uso e Política de Privacidade LGPD/GDPR)
+- ✅ Dashboard completo do usuário com 4 abas
+- ✅ Sistema de testes integrado (test_conexao.php)
 
 ### Países e Moedas Suportados
 
@@ -60,46 +65,64 @@ Sistema completo de remessas internacionais peer-to-peer suportando 9 países e 
 
 ```
 public_html/
-├── index.html              # Landing page
+├── index.html              # Landing page com calculadora de conversão
 ├── login.html              # Página de login
 ├── cadastro.html           # Página de cadastro
-├── dashboard.html          # Dashboard do usuário (criar)
-├── kyc.html                # Upload de documentos (criar)
-├── admin.html              # Painel admin (criar)
+├── dashboard.html          # Dashboard do usuário (4 abas)
+├── kyc.html                # Upload de documentos KYC
+├── admin.html              # Painel administrativo
+├── paises.html             # Informações sobre 9 países suportados
+├── suporte.html            # Central de suporte com FAQ
+├── termos.html             # Termos de Uso
+├── privacidade.html        # Política de Privacidade (LGPD/GDPR)
+├── test_conexao.php        # Teste de conexão e configuração
 ├── .htaccess               # Configurações Apache
 │
 ├── css/
 │   ├── theme.css           # Variáveis CSS
-│   ├── style.css           # Estilos globais + glassmorphism
+│   ├── style.css           # Estilos globais + glassmorphism + calculadora
 │   ├── auth.css            # Estilos de login/cadastro
-│   └── dashboard.css       # Estilos do dashboard
+│   ├── dashboard.css       # Estilos do dashboard
+│   └── countries.css       # Estilos da página de países
 │
 ├── js/
-│   ├── main.js             # Utilidades globais
+│   ├── main.js             # Utilidades globais (API, Auth, Loading, Notificações)
 │   ├── auth.js             # Login/cadastro tradicional
-│   ├── social-login.js     # OAuth integração
-│   ├── kyc.js              # Upload KYC (criar)
-│   ├── admin.js            # Painel admin (criar)
-│   └── dashboard.js        # Dashboard (criar)
+│   ├── social-login.js     # OAuth integração (4 providers)
+│   ├── currency.js         # Calculadora de conversão (72 pares de moedas)
+│   ├── kyc.js              # Upload KYC com preview
+│   ├── admin.js            # Painel admin (estatísticas, aprovações)
+│   └── dashboard.js        # Dashboard usuário (propostas, transações)
 │
 ├── api/
-│   ├── config.php          # Configuração geral
+│   ├── config.php          # Configuração + funções anti-fraude + JWT
 │   ├── auth.php            # API de autenticação
-│   ├── social_login.php    # API OAuth
-│   ├── kyc.php             # API KYC
-│   ├── admin.php           # API admin
+│   ├── social_login.php    # API OAuth (Google, Facebook, Instagram, Apple)
+│   ├── kyc.php             # API KYC com validação
+│   ├── admin.php           # API admin (12 ações)
 │   ├── upload.php          # Handler de uploads
-│   └── proposals.php       # API de propostas
+│   └── proposals.php       # API de propostas P2P
 │
 ├── uploads/
 │   ├── documents/          # Documentos KYC
 │   ├── avatars/            # Fotos de perfil
-│   ├── payment_proofs/     # Comprovantes
-│   └── temp/               # Temporários
+│   ├── payment_proofs/     # Comprovantes de pagamento
+│   └── temp/               # Arquivos temporários
 │
 └── database/
-    └── production_schema.sql  # Schema completo
+    └── production_schema.sql  # Schema completo (11 tabelas + dados iniciais)
 ```
+
+### Estatísticas do Projeto
+
+- **Total de Arquivos:** 30+
+- **Linhas de Código:** ~8,500+
+- **Páginas HTML:** 10
+- **APIs PHP:** 7
+- **Scripts JavaScript:** 7
+- **Folhas de Estilo:** 5
+- **Tabelas no Banco:** 11
+- **Moedas Suportadas:** 9
 
 ## 🗄️ Banco de Dados
 
@@ -208,7 +231,26 @@ chmod 755 public_html/uploads/temp
 3. Aguardar propagação (5-10 min)
 ```
 
-### Passo 6: Testar
+### Passo 6: Testar Instalação
+
+**Teste de Conexão:**
+
+Acesse `https://seudominio.com/test_conexao.php` para verificar:
+
+- ✅ Versão do PHP (>= 7.4)
+- ✅ Extensões PHP necessárias (PDO, pdo_mysql, mbstring, json, fileinfo)
+- ✅ Conexão com MySQL
+- ✅ Verificação de todas as 11 tabelas
+- ✅ Moedas cadastradas (9 esperadas)
+- ✅ Usuário administrador criado
+- ✅ Permissões da pasta uploads/
+- ✅ Protocolo HTTPS ativo
+
+**⚠️ IMPORTANTE:** Delete o arquivo `test_conexao.php` após os testes por segurança!
+
+```bash
+rm public_html/test_conexao.php
+```
 
 **Acesso Admin:**
 ```
@@ -216,13 +258,19 @@ Email: admin@transkwanza.com
 Senha: admin123
 ```
 
-**Fluxo de teste:**
-1. Criar conta normal
-2. Fazer login
-3. Enviar documentos KYC
-4. Login como admin e aprovar
-5. Criar proposta de câmbio
-6. Testar transação
+**Fluxo de teste completo:**
+1. Acessar página inicial e testar calculadora de conversão
+2. Criar conta normal via cadastro
+3. Fazer login
+4. Verificar redirecionamento para KYC
+5. Enviar documentos KYC (frente, verso, selfie)
+6. Login como admin e aprovar KYC
+7. Retornar ao usuário normal e acessar dashboard
+8. Criar proposta de câmbio
+9. Buscar propostas disponíveis com filtros
+10. Aceitar uma proposta e criar transação
+11. Login como admin e aprovar transação
+12. Verificar histórico e reputação
 
 ## 🔒 Segurança
 
@@ -352,6 +400,52 @@ POST /api/proposals.php?action=accept
 Body: { proposal_id }
 ```
 
+## 💱 Calculadora de Conversão
+
+### Funcionalidade Principal
+
+A calculadora de conversão em tempo real é uma das principais features do TransKwanza, disponível na landing page (index.html).
+
+**Recursos:**
+- Conversão entre todas as 9 moedas suportadas (72 combinações possíveis)
+- Cálculo automático de taxa de 3%
+- Atualização em tempo real conforme o usuário digita
+- Botão de swap para inverter moedas rapidamente
+- Interface visual com glassmorphism
+- Taxas de câmbio pré-configuradas
+
+**Exemplo de Uso:**
+
+```javascript
+// Em currency.js
+const converter = new CurrencyConverter();
+
+// Converter 1000 BRL para USD
+const result = converter.convert(1000, 'BRL', 'USD');
+// result = 200.00 USD
+
+// Com taxa de 3%
+const fee = converter.calculateFee(1000);
+// fee = 30.00 BRL
+
+const total = result - converter.calculateFee(result);
+// total = 194.00 USD (após taxa)
+```
+
+**Taxas de Câmbio Implementadas:**
+
+As taxas estão configuradas em `js/currency.js` no objeto `EXCHANGE_RATES`:
+
+```javascript
+const EXCHANGE_RATES = {
+    'BRL': { 'AOA': 150.25, 'EUR': 0.18, 'USD': 0.20, ... },
+    'AOA': { 'BRL': 0.0067, 'EUR': 0.0012, ... },
+    // ... todas as 72 combinações
+};
+```
+
+**Localização:** `index.html` linha 120+ (seção calculator)
+
 ## 🎨 Design
 
 ### Glassmorphism
@@ -373,30 +467,50 @@ O sistema usa design glassmorphism (efeito de vidro fosco):
 --warning-color: #f39c12;
 ```
 
-## 📝 Próximos Passos
+## ✅ Status do Projeto
 
-### Páginas a Criar
+### Completamente Implementado
 
-- [ ] `dashboard.html` - Dashboard do usuário
-- [ ] `kyc.html` - Upload de documentos
-- [ ] `admin.html` - Painel administrativo
+✅ **Sistema Core:**
+- Sistema de autenticação completo (tradicional + OAuth)
+- Calculadora de conversão em tempo real (72 pares de moedas)
+- Dashboard completo do usuário (4 abas funcionais)
+- Painel administrativo completo (estatísticas + aprovações)
+- Sistema KYC com upload e preview de documentos
+- Sistema anti-fraude integrado
+- 11 tabelas de banco de dados com relacionamentos
 
-### JavaScript a Criar
+✅ **Páginas Públicas:**
+- Landing page com calculadora interativa
+- Página de login e cadastro
+- Informações sobre 9 países suportados
+- Central de suporte com FAQ completo
+- Termos de Uso
+- Política de Privacidade (LGPD/GDPR)
 
-- [ ] `kyc.js` - Lógica de upload KYC
-- [ ] `admin.js` - Painel admin
-- [ ] `dashboard.js` - Dashboard usuário
-- [ ] `currency.js` - Cálculos de câmbio
+✅ **Recursos Técnicos:**
+- 7 APIs RESTful em PHP
+- JWT para autenticação stateless
+- PDO com prepared statements (SQL Injection protection)
+- Upload seguro de arquivos (validação + detecção de fraude)
+- Design responsivo com glassmorphism
+- Sistema de notificações toast
+- Loading states e tratamento de erros
 
-### Melhorias Futuras
+### 🚀 Melhorias Futuras (Opcional)
+
+Recursos que podem ser adicionados no futuro:
 
 - [ ] App mobile (React Native / Flutter)
-- [ ] Gateway de pagamento (Stripe/PayPal)
-- [ ] Chat em tempo real (WebSocket)
-- [ ] Sistema de reputação avançado
-- [ ] Multi-idiomas (i18n)
-- [ ] API de câmbio em tempo real
-- [ ] 2FA (autenticação de dois fatores)
+- [ ] Gateway de pagamento integrado (Stripe/PayPal)
+- [ ] Chat em tempo real (WebSocket / Socket.io)
+- [ ] Sistema de reputação avançado com badges
+- [ ] Multi-idiomas (i18n) - EN, ES, FR
+- [ ] API de câmbio em tempo real (ExchangeRate-API)
+- [ ] 2FA (autenticação de dois fatores via SMS/App)
+- [ ] Notificações push (web push API)
+- [ ] Analytics e relatórios avançados
+- [ ] Programa de afiliados
 
 ## 🐛 Troubleshooting
 
