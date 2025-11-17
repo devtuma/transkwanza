@@ -1,0 +1,13 @@
+# Proteger pasta de uploads
+# Permitir apenas imagens e PDFs
+
+<FilesMatch "\.(php|php3|php4|php5|phtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Permitir apenas tipos de arquivo específicos
+<FilesMatch "\.(jpg|jpeg|png|gif|pdf)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

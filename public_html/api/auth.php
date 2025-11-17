@@ -59,7 +59,8 @@ if ($action === 'register') {
                 'id' => $userId,
                 'name' => $name,
                 'email' => $email,
-                'country' => $country
+                'country' => $country,
+                'kyc_status' => 'pending'
             ]
         ]);
     } else {
@@ -103,7 +104,8 @@ else if ($action === 'login') {
             'id' => $user['id'],
             'name' => $user['name'],
             'email' => $user['email'],
-            'country' => $user['country']
+            'country' => $user['country'],
+            'kyc_status' => $user['kyc_status']
         ]
     ]);
 }

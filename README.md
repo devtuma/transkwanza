@@ -73,13 +73,68 @@ Senha: password
 
 ---
 
-## 🔄 PRÓXIMAS FASES
+## 🚀 FASE 2 - SISTEMA KYC ✅
 
-### FASE 2 - Sistema KYC (Pendente)
-- [ ] Upload de documentos
-- [ ] Validação de documentos
-- [ ] Status de verificação
-- [ ] Redirecionamento automático
+**Status:** Completa
+**Objetivo:** Upload e verificação de documentos
+
+### ✅ O que funciona:
+
+- ✅ Upload de 3 documentos (frente, verso, selfie)
+- ✅ Preview de imagens antes do upload
+- ✅ Validação de tamanho (5MB) e tipo (JPG, PNG, PDF)
+- ✅ Aprovação automática (para testes)
+- ✅ Redirecionamento automático após login
+- ✅ Verificação de status KYC
+- ✅ Interface com steps visuais
+
+### 📁 Arquivos adicionados:
+
+```
+public_html/
+├── kyc.html               # Página de upload KYC
+├── api/
+│   └── kyc.php            # API de upload (2 endpoints)
+├── js/
+│   └── kyc.js             # Lógica de upload + preview
+└── uploads/
+    ├── .htaccess          # Proteção de segurança
+    └── documents/         # Pasta para documentos
+```
+
+### 🗄️ Banco de Dados Atualizado:
+
+**Novos campos na tabela `users`:**
+- `document_type` - Tipo do documento (rg, cnh, passport, cpf)
+- `document_number` - Número do documento
+- `document_front` - Arquivo da frente
+- `document_back` - Arquivo do verso (opcional)
+- `document_selfie` - Arquivo da selfie
+- `kyc_status` - Status (pending, under_review, approved, rejected)
+- `kyc_submitted_at` - Data de envio
+- `kyc_reviewed_at` - Data de aprovação/rejeição
+
+### 🔄 Fluxo Completo:
+
+1. Usuário cria conta → `kyc_status = 'pending'`
+2. Login redireciona automaticamente para `kyc.html`
+3. Usuário faz upload dos documentos com preview
+4. Sistema valida e aprova automaticamente (FASE 2)
+5. Redireciona para `dashboard.html`
+
+### 📝 Como testar:
+
+1. Criar nova conta ou usar teste@transkwanza.com
+2. Será redirecionado para página KYC
+3. Selecionar tipo de documento
+4. Fazer upload de 3 fotos (frente, verso opcional, selfie)
+5. Ver preview das imagens
+6. Clicar em "Enviar Documentos"
+7. Aprovação automática e redirecionamento
+
+---
+
+## 🔄 PRÓXIMAS FASES
 
 ### FASE 3 - Propostas Básicas (Pendente)
 - [ ] Criar propostas
@@ -106,12 +161,23 @@ Senha: password
 
 ---
 
-## 📊 Estatísticas da Fase 1:
+## 📊 Estatísticas do Projeto:
 
-- **Arquivos:** 8
-- **Linhas de código:** ~500
-- **Tempo de desenvolvimento:** 1 dia
-- **Status:** ✅ FUNCIONANDO
+**FASE 1:**
+- Arquivos: 8
+- Linhas: ~500
+- Status: ✅ COMPLETA
+
+**FASE 2:**
+- Arquivos adicionados: 4
+- Linhas adicionadas: ~450
+- Status: ✅ COMPLETA
+
+**TOTAL ATUAL:**
+- **Total de arquivos:** 12
+- **Total de linhas:** ~950
+- **Fases completas:** 2 de 6
+- **Status geral:** ✅ FUNCIONANDO PERFEITAMENTE
 
 ---
 

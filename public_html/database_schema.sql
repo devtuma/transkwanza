@@ -11,9 +11,21 @@ CREATE TABLE users (
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     country VARCHAR(50) NOT NULL,
+
+    -- FASE 2: Campos KYC
+    document_type VARCHAR(20) DEFAULT NULL,
+    document_number VARCHAR(50) DEFAULT NULL,
+    document_front VARCHAR(255) DEFAULT NULL,
+    document_back VARCHAR(255) DEFAULT NULL,
+    document_selfie VARCHAR(255) DEFAULT NULL,
+    kyc_status ENUM('pending', 'under_review', 'approved', 'rejected') DEFAULT 'pending',
+    kyc_submitted_at TIMESTAMP NULL DEFAULT NULL,
+    kyc_reviewed_at TIMESTAMP NULL DEFAULT NULL,
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    INDEX idx_email (email)
+    INDEX idx_email (email),
+    INDEX idx_kyc_status (kyc_status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Inserir um usuário de teste

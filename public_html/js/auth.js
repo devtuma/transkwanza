@@ -66,9 +66,13 @@ if (registerForm) {
             // Salvar usuário no localStorage
             localStorage.setItem('user', JSON.stringify(result.user));
 
-            // Redirecionar para dashboard
+            // FASE 2: Redirecionar para KYC se status for 'pending'
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                if (result.user.kyc_status === 'pending') {
+                    window.location.href = 'kyc.html';
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
             }, 1500);
         } else {
             showMessage(result.message, 'error');
@@ -105,9 +109,13 @@ if (loginForm) {
             // Salvar usuário no localStorage
             localStorage.setItem('user', JSON.stringify(result.user));
 
-            // Redirecionar para dashboard
+            // FASE 2: Redirecionar para KYC se status for 'pending'
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                if (result.user.kyc_status === 'pending') {
+                    window.location.href = 'kyc.html';
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
             }, 1500);
         } else {
             showMessage(result.message, 'error');
