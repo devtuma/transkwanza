@@ -41,9 +41,9 @@ public_html/
 **Credenciais (Hostinger):**
 ```
 Host: localhost
-Database: u442547792_transkwanza
-Username: u442547792_admin
-Password: Life0852new2580!
+Database: u758469769_transkwanza
+Username: u758469769_admin
+Password: Life0852!
 ```
 
 **Tabelas:**

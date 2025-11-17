@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Configurações do banco (Hostinger)
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'u442547792_transkwanza');
-define('DB_USER', 'u442547792_admin');
-define('DB_PASS', 'Life0852new2580!');
+define('DB_NAME', 'u758469769_transkwanza');
+define('DB_USER', 'u758469769_admin');
+define('DB_PASS', 'Life0852!');
 
 // Conexão com o banco
 try {
