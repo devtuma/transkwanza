@@ -12,9 +12,11 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     country VARCHAR(50) NOT NULL,
 
-    -- FASE 2: Campos KYC
-    document_type VARCHAR(20) DEFAULT NULL,
+    -- FASE 2: Campos KYC (Documentos Universais)
+    -- Tipos aceitos: national_id, drivers_license, passport, residence_permit
+    document_type VARCHAR(30) DEFAULT NULL,
     document_number VARCHAR(50) DEFAULT NULL,
+    -- Caminhos: uploads/users/{user_id}/kyc/{filename}
     document_front VARCHAR(255) DEFAULT NULL,
     document_back VARCHAR(255) DEFAULT NULL,
     document_selfie VARCHAR(255) DEFAULT NULL,

@@ -61,8 +61,31 @@ else if ($action === 'upload') {
         sendJSON(['success' => false, 'message' => 'É necessário enviar foto da frente do documento e selfie'], 400);
     }
 
+    // Função para criar estrutura de pastas do usuário
+    function createUserDirectories($userId) {
+        $baseDir = __DIR__ . '/../uploads/users/' . $userId;
+
+        $directories = [
+            $baseDir,
+            $baseDir . '/profile',
+            $baseDir . '/kyc',
+            $baseDir . '/transactions',
+            $baseDir . '/other'
+        ];
+
+        foreach ($directories as $dir) {
+            if (!file_exists($dir)) {
+                if (!mkdir($dir, 0755, true)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // Função para validar e fazer upload de arquivo
-    function uploadFile($file, $userId, $type) {
+    function uploadFile($file, $userId, $type, $subfolder = 'kyc') {
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
         $maxSize = 5 * 1024 * 1024; // 5MB
 
@@ -76,14 +99,22 @@ else if ($action === 'upload') {
             return ['success' => false, 'message' => 'Arquivo muito grande. Máximo: 5MB'];
         }
 
+        // Criar estrutura de pastas do usuário se não existir
+        if (!createUserDirectories($userId)) {
+            return ['success' => false, 'message' => 'Erro ao criar diretórios do usuário'];
+        }
+
         // Gerar nome único
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $filename = 'user_' . $userId . '_' . $type . '_' . time() . '.' . $extension;
-        $uploadPath = __DIR__ . '/../uploads/documents/' . $filename;
+        $filename = $type . '_' . time() . '_' . uniqid() . '.' . $extension;
+
+        // Caminho organizado: uploads/users/{user_id}/kyc/{filename}
+        $relativePath = 'users/' . $userId . '/' . $subfolder . '/' . $filename;
+        $uploadPath = __DIR__ . '/../uploads/' . $relativePath;
 
         // Fazer upload
         if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-            return ['success' => true, 'filename' => $filename];
+            return ['success' => true, 'filename' => $relativePath];
         }
 
         return ['success' => false, 'message' => 'Erro ao fazer upload'];

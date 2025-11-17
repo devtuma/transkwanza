@@ -105,14 +105,47 @@ public_html/
 ### 🗄️ Banco de Dados Atualizado:
 
 **Novos campos na tabela `users`:**
-- `document_type` - Tipo do documento (rg, cnh, passport, cpf)
+- `document_type` - Tipo do documento (UNIVERSAL):
+  - `national_id` - National ID / ID Nacional (RG, BI, DNI)
+  - `drivers_license` - Driver's License / Carta de Condução (CNH)
+  - `passport` - Passport / Passaporte
+  - `residence_permit` - Residence Permit / Autorização de Residência
 - `document_number` - Número do documento
-- `document_front` - Arquivo da frente
-- `document_back` - Arquivo do verso (opcional)
-- `document_selfie` - Arquivo da selfie
+- `document_front` - Caminho do arquivo da frente
+- `document_back` - Caminho do arquivo do verso (opcional)
+- `document_selfie` - Caminho do arquivo da selfie
 - `kyc_status` - Status (pending, under_review, approved, rejected)
 - `kyc_submitted_at` - Data de envio
 - `kyc_reviewed_at` - Data de aprovação/rejeição
+
+### 📁 Organização de Arquivos por Usuário:
+
+**Estrutura escalável para MILHÕES de usuários:**
+
+```
+uploads/users/
+├── {user_id}/
+│   ├── profile/          # Foto de perfil
+│   ├── kyc/              # Documentos de verificação
+│   ├── transactions/     # Comprovantes de transação
+│   └── other/            # Outros documentos
+```
+
+**Exemplo prático (Usuário ID 42):**
+```
+uploads/users/42/
+├── kyc/
+│   ├── front_1234567890_abc123.jpg
+│   ├── back_1234567891_def456.jpg
+│   └── selfie_1234567892_ghi789.jpg
+```
+
+**Benefícios:**
+- ✅ Escalável para milhões de usuários
+- ✅ Fácil encontrar arquivos de usuário específico
+- ✅ Organizado por tipo de documento
+- ✅ Backup e manutenção simplificados
+- ✅ Segurança - pastas isoladas por usuário
 
 ### 🔄 Fluxo Completo:
 
