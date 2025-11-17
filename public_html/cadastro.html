@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - TransKwanza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header-simple">
+            <a href="index.html" class="logo">🌍 TransKwanza</a>
+        </header>
+
+        <main class="main-content">
+            <div class="card auth-card">
+                <h2>Criar Conta</h2>
+                <p class="subtitle">Comece a usar TransKwanza hoje</p>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required placeholder="Mínimo 6 caracteres">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">País</label>
+                        <select id="country" name="country" required>
+                            <option value="">Selecione seu país</option>
+                            <option value="Brasil">🇧🇷 Brasil</option>
+                            <option value="Angola">🇦🇴 Angola</option>
+                            <option value="Portugal">🇵🇹 Portugal</option>
+                            <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+                            <option value="Cuba">🇨🇺 Cuba</option>
+                            <option value="Rússia">🇷🇺 Rússia</option>
+                            <option value="África do Sul">🇿🇦 África do Sul</option>
+                            <option value="Namíbia">🇳🇦 Namíbia</option>
+                            <option value="Moçambique">🇲🇿 Moçambique</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Criar Conta</button>
+
+                    <p class="text-center mt-20">
+                        Já tem conta? <a href="login.html">Entrar</a>
+                    </p>
+                </form>
+
+                <div id="message" class="message"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
