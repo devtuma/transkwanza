@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propostas de Câmbio - TransKwanza</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .proposal-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .proposal-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .proposal-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .proposal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .proposal-type {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .proposal-type.buy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .proposal-type.sell {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .currency-pair {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .proposal-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .kyc-alert {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .kyc-alert strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #856404;
+        }
+
+        .calculator-preview {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .calculator-preview .result {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1976d2;
+            margin-top: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header-dashboard">
+            <div class="logo">🌍 TransKwanza</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="dashboard.html" class="btn btn-small">Dashboard</a>
+                <button id="logoutBtn" class="btn btn-small">Sair</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card">
+                <h2>💱 Propostas de Câmbio</h2>
+                <p class="subtitle">Crie propostas ou encontre as melhores ofertas de câmbio</p>
+
+                <!-- KYC Alert (mostrado se necessário) -->
+                <div id="kycAlert" class="kyc-alert" style="display: none;">
+                    <strong>⚠️ Verificação KYC Necessária</strong>
+                    <p>Para criar propostas de câmbio, você precisa completar a verificação de identidade (KYC).</p>
+                    <a href="kyc.html" class="btn btn-primary">Completar KYC Agora</a>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" data-tab="browse">🔍 Buscar Propostas</button>
+                    <button class="tab" data-tab="create">➕ Criar Proposta</button>
+                </div>
+
+                <!-- Tab: Buscar Propostas -->
+                <div id="browse" class="tab-content active">
+                    <div class="filters">
+                        <div class="form-group">
+                            <label>Moeda de Origem</label>
+                            <select id="filterFrom">
+                                <option value="">Todas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Moeda de Destino</label>
+                            <select id="filterTo">
+                                <option value="">Todas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select id="filterType">
+                                <option value="">Todos</option>
+                                <option value="buy">Comprar</option>
+                                <option value="sell">Vender</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button id="applyFilters" class="btn btn-primary btn-block">Buscar</button>
+                        </div>
+                    </div>
+
+                    <div id="proposalsList" class="proposal-list">
+                        <!-- Propostas serão carregadas aqui -->
+                    </div>
+                </div>
+
+                <!-- Tab: Criar Proposta -->
+                <div id="create" class="tab-content">
+                    <form id="createProposalForm">
+                        <div class="form-group">
+                            <label for="proposalType">Tipo de Proposta</label>
+                            <select id="proposalType" required>
+                                <option value="">Selecione</option>
+                                <option value="sell">Vender moeda</option>
+                                <option value="buy">Comprar moeda</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currencyFrom">Moeda que Você Tem</label>
+                            <select id="currencyFrom" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currencyTo">Moeda que Você Quer</label>
+                            <select id="currencyTo" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Valor</label>
+                            <input type="number" id="amount" step="0.01" min="0.01" required placeholder="0.00">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exchangeRate">Taxa de Câmbio</label>
+                            <input type="number" id="exchangeRate" step="0.000001" min="0.000001" required placeholder="0.00">
+                            <small style="color: #666;">Ex: 1 BRL = 0.20 USD, insira 0.20</small>
+                        </div>
+
+                        <div id="conversionPreview" class="calculator-preview" style="display: none;">
+                            <div><strong>Previsão da Conversão:</strong></div>
+                            <div class="result" id="previewResult"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paymentMethod">Método de Pagamento</label>
+                            <select id="paymentMethod" required>
+                                <option value="">Selecione</option>
+                                <option value="pix">PIX</option>
+                                <option value="bank_transfer">Transferência Bancária</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="wise">Wise</option>
+                                <option value="western_union">Western Union</option>
+                                <option value="moneygram">MoneyGram</option>
+                                <option value="cash">Dinheiro (Encontro Pessoal)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Criar Proposta</button>
+                    </form>
+                </div>
+
+                <div id="message" class="message"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/proposals.js"></script>
+</body>
+</html>

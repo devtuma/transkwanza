@@ -66,13 +66,10 @@ if (registerForm) {
             // Salvar usuário no localStorage
             localStorage.setItem('user', JSON.stringify(result.user));
 
-            // FASE 2: Redirecionar para KYC se status for 'pending'
+            // FASE 3: Sempre redirecionar para dashboard
+            // KYC será exigido apenas ao criar primeira proposta
             setTimeout(() => {
-                if (result.user.kyc_status === 'pending') {
-                    window.location.href = 'kyc.html';
-                } else {
-                    window.location.href = 'dashboard.html';
-                }
+                window.location.href = 'dashboard.html';
             }, 1500);
         } else {
             showMessage(result.message, 'error');
@@ -109,13 +106,10 @@ if (loginForm) {
             // Salvar usuário no localStorage
             localStorage.setItem('user', JSON.stringify(result.user));
 
-            // FASE 2: Redirecionar para KYC se status for 'pending'
+            // FASE 3: Sempre redirecionar para dashboard
+            // KYC será exigido apenas ao criar primeira proposta
             setTimeout(() => {
-                if (result.user.kyc_status === 'pending') {
-                    window.location.href = 'kyc.html';
-                } else {
-                    window.location.href = 'dashboard.html';
-                }
+                window.location.href = 'dashboard.html';
             }, 1500);
         } else {
             showMessage(result.message, 'error');
